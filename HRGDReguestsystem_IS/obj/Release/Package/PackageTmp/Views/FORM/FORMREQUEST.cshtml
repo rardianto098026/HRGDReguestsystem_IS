@@ -1,0 +1,884 @@
+﻿@model HRGDReguestsystem_IS.Models.PagedList<HRGDReguestsystem_IS.Models.FORMModels>
+@{
+    ViewBag.Title = "FORMREQUEST";
+}
+
+<h2 style="margin-left:19px">Form Request Group Directory</h2>
+@using (Html.BeginForm("FORMREQUEST", "FORM", FormMethod.Post))
+    {
+    //3058899
+    <div class="row">
+        <br />
+        <br />
+        <div class="col-xs-12">
+            <div id="exTab2" class="container">
+                @*<ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1" data-toggle="tab">Page 1</a></li>
+                    <li><a href="#tab2" data-toggle="tab">Page 2</a></li>
+                    <li><a href="#tab3" data-toggle="tab">Page 3</a></li>
+                </ul>*@
+                @*<div class="tab-content">
+                    <div class="tab-pane active" id="tab1">*@
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Terdaftar di YES System </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("TERDAFTAR", (SelectList)ViewBag.TerdaftarDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtterdaftar" })
+                                @*@Html.ValidationMessageFor(model => model.EMPLOYEESTATUS, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Employee Status </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("EMPLOYEESTATUS", (SelectList)ViewBag.EmployeeStatusDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtemployeestatus" })
+                                @*@Html.ValidationMessageFor(model => model.EMPLOYEESTATUS, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div> <br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;" id="txtonchangeemployeestatus2"> Remarks </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.EMPLOYEESTATUS_FreeText, new { @class = "col-xs-10 col-sm-5", id = "txtonchangeemployeestatus", style = "" })
+                            </div>
+                        </div><br /><br />
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Entity </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("ENTITY", (SelectList)ViewBag.EntityDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "ENTITYDDL" })
+                                @*@Html.ValidationMessageFor(model => model.ENTITY, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Unique ID (E-mail AXA per Entity) </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.UNIQUEID, new { @class = "col-xs-10 col-sm-5", id = "txtuniqueid" })
+                                @*@Html.TextBox("EmployeeName_Requestor", null, new { id = "EmployeeName_Requestor", @class = "col-xs-10 col-sm-5", @placeholder = "EmployeeName", @readonly = "readonly" })*@
+                                @Html.ValidationMessageFor(model => model.UNIQUEID, "", new { @class = "text-danger", style = "Margin-left:10px" })
+                             
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Personal Title </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("PERSONALTITLE", (SelectList)ViewBag.PersonalTitleDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtpersonaltitle" })
+                                @*@Html.ValidationMessageFor(model => model.PERSONALTITLE, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> First Name </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.FIRSTNAME, new { @class = "col-xs-10 col-sm-5", id = "txtfirstname", @onkeypress = "return ValidateAlpha(event);" })
+                                @*@Html.TextBox("EmployeeName_Requestor", null, new { id = "EmployeeName_Requestor", @class = "col-xs-10 col-sm-5", @placeholder = "EmployeeName", @readonly = "readonly" })*@
+                                @*@Html.ValidationMessageFor(model => model.FIRSTNAME, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Last Name (1 Word Only) </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.LASTNAME, new { @class = "col-xs-10 col-sm-5", id = "txtlastname", @onkeypress = "return nospace(event.keyCode)" })
+                                @*@Html.TextBox("EmployeeName_Requestor", null, new { id = "EmployeeName_Requestor", @class = "col-xs-10 col-sm-5", @placeholder = "EmployeeName", @readonly = "readonly" })*@
+                                @*@Html.ValidationMessageFor(model => model.LASTNAME, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+
+                        @*<a class="btn btn-primary btnNext">Next</a>
+                    </div>
+                    <div class="tab-pane" id="tab2">*@
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Company </label>
+                            <div class="col-sm-9">
+                                @Html.TextBox("Company", "", new { @class = "col-xs-10 col-sm-5", id = "txtcompany", @readonly = "readonly" })
+                                @Html.HiddenFor(model => model.COMPANY, new { id = "txtcompany" })
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Site Address </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("SITEADD", (SelectList)ViewBag.SiteAddDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtsiteadd" })
+                                @*@Html.ValidationMessageFor(model => model.SITEADD, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Office Floor </label>
+                            <div class="col-sm-9">
+                                @*@Html.DropDownListFor(m => m.OFFICEFLOOR, Model.OFFICEFLOORDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtofficefloor", required = "required", name = "floor" })*@                            
+                                @Html.DropDownList("OFFICEFLOOR", (SelectList)ViewBag.OFFICEFLOORDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtofficefloor" })
+                                @*@Html.HiddenFor(model => model.OFFICEFLOOR)*@
+                                @Html.ValidationMessageFor(model => model.OFFICEFLOOR, "", new { @class = "text-danger", style = "Margin-left:10px" })
+                                
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> City </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.CITY, new { @class = "col-xs-10 col-sm-5", id = "txtcity" })
+                                @*@Html.ValidationMessageFor(model => model.CITY, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Office Phone </label>
+                            <div class="col-sm-9">
+                                @Html.TextBox("OFFICEPHONE", "", new { id = "txtofficephone", @class = "col-xs-10 col-sm-5", @readonly = "readonly" })
+                                @Html.HiddenFor(model => model.OFFICEPHONE)
+                                @Html.ValidationMessageFor(model => model.OFFICEPHONE, "", new { @class = "text-danger", style = "Margin-left:10px" })
+                                
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Fax</label>
+                            <div class="col-sm-9">
+                                @Html.TextBox("FAX", "", new { id = "txtfax", @class = "col-xs-10 col-sm-5", @readonly = "readonly" })
+                                @Html.HiddenFor(model => model.FAX)
+                                @Html.ValidationMessageFor(model => model.FAX, "", new { @class = "text-danger", style = "Margin-left:10px" })
+                                
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Mobile </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.MOBILE, new { @class = "col-xs-10 col-sm-5", id = "txtmobile", onkeypress = "return allowOnlyDigit(event, this)", @maxlength = 15 })
+                                @*@Html.ValidationMessageFor(model => model.MOBILE, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> E-mail </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.EMAIL, new { @class = "col-xs-10 col-sm-5", id = "txtemail", @readonly = "readonly" })
+                                @*@Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                @*<Font color="red"> * </Font>*@
+                             </div>
+                        </div><br /><br />
+                        @*<a class="btn btn-primary btnNext">Next</a>
+                        <a class="btn btn-primary btnPrevious">Previous</a>
+                    </div>
+                    <div class="tab-pane" id="tab3">*@
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Professional Family </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("PROFESSIONALFAMILY",(SelectList)ViewBag.ProfessionalFamilyDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtprofessionalfamily" })
+                                @*@Html.DropDownList("accountid", new SelectList(ViewBag.Accounts, "AccountID", "AccountName"))*@
+                                @*@Html.ValidationMessageFor(model => model.PROFESSIONALFAMILY, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                             </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Title/Position Name </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.TITTLE, new { @class = "col-xs-10 col-sm-5", id = "txttitlepositionname" })
+                                @*@Html.DropDownList("accountid", new SelectList(ViewBag.Accounts, "AccountID", "AccountName"))*@
+                                @*@Html.ValidationMessageFor(model => model.TITTLE, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Department </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.DEPART, new { @class = "col-xs-10 col-sm-5", id = "txtdepart" })
+                                @*@Html.ValidationMessageFor(model => model.DEPART, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Manager Name </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("MANAGERNAME", (SelectList)ViewBag.managernameDDL, htmlAttributes: new {
+                               @class = "col-xs-10 col-sm-5 select2",
+                               @tabindex = "-1",
+                               @placeholder = "-Select-",
+                               id = "MANAGERNAMEDDL",
+                               data_show_subtext = "true",
+                               data_live_search = "true"
+                           })
+                                @*@Html.ValidationMessageFor(model => model.ENTITY, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Manager E-mail </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.MANAGEREMAIL, new { @class = "col-xs-10 col-sm-5", id = "txtmanageremail", @readonly = "readonly" })
+                               
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Expired / Contract End Date </label>
+                            <div class="col-sm-9">
+                                @*@Html.EditorFor(model => model.EXPIRED, "{0:MMM d yyyy}", new { htmlAttributes = new { @class = "col-xs-10 col-sm-5 date", @placeholder = "dd/mm/yyyy", id = "expired" } })*@
+                                @Html.TextBoxFor(c => c.EXPIRED, new { id = "datepicker", @class = "col-xs-10 col-sm-5", @placeholder = "dd/mm/yyyy" })
+                                @*@Html.HiddenFor(model => model.EXPIRED)*@
+                                @*@Html.EditorFor(model => model.EXPIRED, "{0:d MMM yyyy}", new { @class = "col-xs-10 col-sm-5", @placeholder = "0:d MMM yyyy", id = "txtexpired" })*@
+                                
+
+                                @*<span class="input-group-addon add-on" style="width: 30px;margin-left:25px">*@
+                                    <i data-time-icon="fa fa-calendar" class="fa fa-calendar" data-date-icon="fa fa-calendar"></i>
+                                @*</span>*@
+                                @*@Html.ValidationMessageFor(model => model.EXPIRED, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+
+                            </div>
+                        </div><br /><br />
+                        <div class="col-xs-12">
+                            @Html.Raw(TempData["messageRequest"])
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-sm btn-success" type="submit" name="Submit" id="INSERT" value="INSERT" style="margin-left:212px; height:40px; width:100px">
+                                Submit
+                            </button>
+                            @*<button class="btn btn-sm btn-success" type="submit" name="Submit" id="submit" value="next" style="margin-left:20px; height:40px; width:100px">
+                                Next
+                            </button>*@
+                        </div><br /><br />
+                        @*<a class="btn btn-primary btnPrevious">Previous</a>
+                    </div>*@
+
+                @*</div>*@
+
+            </div>
+        </div>
+    </div>
+
+
+
+    @*<div style="margin-left:50px;margin-right:50px">
+        <br />
+        <br />
+        <div id="tabs" class="nav nav-tabs" style="background-color:transparent">
+            <ul>
+                <li><a href="#tabs-1">Form 1</a></li>
+                <li><a href="#tabs-2">Form 2</a></li>
+                <li><a href="#tabs-3">Form 3</a></li>
+            </ul>
+            <div id="tabs-1">
+                <table>*@
+                    @*<tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Terdaftar di YES System :</label>
+                        </td>
+                        <td>
+                            <select class="form-control" id="txtterdaftar" name="terdaftar" style="width: 400px ;">
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                        </td>
+
+                    </tr>*@
+                    @*<tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Employee Status :</label>
+                        </td>
+                        <td>*@
+                            @*@Html.DropDownListFor(m => m.EMPLOYEESTATUS, Model.EMPLOYEESTATUSDDL,htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtemployeestatus"@*, required = "required", name = "Emp_Status" })*@
+                        @*</td>
+                        <td>*@
+                            @*<Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.EMPLOYEESTATUS, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Entity :</label>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.ENTITY, Model.ENTITYDDL, htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtentity"@*, required = "required", name = "entity" })*@
+                        @*</td>*@
+                        @*<td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.ENTITY, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Unique ID (Email AXA per entity) :</label>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => Model.UNIQUEID, new { id = "txtuniqueid", @class = "form-control", placeholder = "Unique ID (Email AXA per entity)"@*, required = "required"*@ @*})*@
+                        @*</td>
+                        <td>*@
+                            @*<Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.UNIQUEID, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Personal Title :</label>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.PERSONALTITLE, Model.PERSONALTITLEDDL, htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtpersonaltitle"@*, required = "required"*@ @*})*@
+                        @*</td>
+                        <td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.PERSONALTITLE, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">First Name :</label>
+                        </td>*@
+                        @*<td>
+                            @Html.TextBoxFor(m => Model.FIRSTNAME, new { id = "txtfirstname", @class = "form-control", placeholder = "First Name"@*, required = "required"*@ @*})*@
+                        @*</td>
+                        <td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.FIRSTNAME, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Last Name ( 1 Word Only ) :</label>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => Model.LASTNAME, new { id = "txtlastname", @class = "form-control", placeholder = "Last Name ( 1 Word Only )"@*, required = "required"*@ @*})*@
+                        @*</td>
+                        <td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.LASTNAME, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="tabs-2">
+                <table>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Company :</label>
+                        </td>
+                        <td  style="width: 400px ;">
+                            @Html.DropDownListFor(m => m.COMPANY, Model.COMPANYDDL, htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtcompany", required = "required", @readonly = "readonly"@*, @disabled = "disabled"})*@
+                            @*@Html.HiddenFor(model => model.COMPANYDDL)*@
+                         @*</td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Site Address :</label>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.SITEADD, Model.SITEADDDDL, htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtsiteadd"@*, required = "required"*@ @*})*@
+                        @*</td>
+                        <td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.SITEADD, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Office Floor :</label>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.OFFICEFLOOR, Model.OFFICEFLOORDDL, htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtofficefloor", required = "required", @readonly = "readonly" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">City :</label>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.CITY, Model.CITYDDL, htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtcity"@*, required = "required"*@ @*})*@
+                        @*</td>
+                        <td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.CITY, "", new { @class = "text-danger" })*@
+                        @*</td>
+    </tr>
+    <tr>
+        <td height="50px">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Office Phone :</label>
+        </td>
+        <td>
+            @Html.DropDownListFor(m => m.OFFICEPHONE, Model.OFFICEPHONEDDL, htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtofficephone", required = "required", @readonly = "readonly" })
+        </td>
+    </tr>
+    <tr>
+        <td height="50px">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Fax :</label>
+        </td>
+        <td>
+            @Html.DropDownListFor(m => m.FAX, Model.FAXDDL, htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtfax", required = "required", @readonly = "readonly" })
+        </td>
+    </tr>
+    <tr>
+        <td height="50px">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Mobile :</label>
+        </td>
+        <td>
+            @Html.TextBoxFor(m => Model.MOBILE, new { id = "txtlmobile", @class = "form-control", placeholder = "Mobile"@*, required = "required", onkeypress = "return allowOnlyDigit(event, this)" })*@
+                        @*</td>
+                        <td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.MOBILE, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="tabs-3">
+                <table>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">E-mail :</label>
+                        </td>
+                        <td  style="width: 400px ;">
+                            @Html.TextBoxFor(m => Model.EMAIL, new { id = "txtlemail", @class = "form-control", placeholder = "Email", @readonly = "readonly", onChange = "return Getmail(this);" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Professional Family :</label>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.PROFESSIONALFAMILY, Model.PROFESSIONALFAMILYDDL, htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtprofessionalfamily"@*, required = "required"*@ @*})*@
+                        @*</td>
+                        <td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.PROFESSIONALFAMILY, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Title/Position Name :</label>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.TITTLE, Model.TITTLEDDL, htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txttitle"@*, required = "required"*@ @*})*@
+                        @*</td>
+                        <td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.TITTLE, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Department :</label>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.DEPART, Model.DEPARTDDL, htmlAttributes: new { @class = "form-control select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtdepart"@*, required = "required"*@ @*})*@
+                        @*</td>
+                        <td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.DEPART, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Manager Name :</label>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => Model.MANAGERNAME, new { id = "txtlmanagername", @class = "form-control", placeholder = "Manager Name"@*, required = "required"*@ @*})*@
+                        @*</td>
+                        <td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.MANAGERNAME, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Manager Email :</label>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => Model.MANAGEREMAIL, new { id = "txtmanageremail", @class = "form-control", placeholder = "Manager Email"@*, required = "required"*@ @*})*@
+
+                        @*</td>
+                        <td>*@
+                            @*<Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.MANAGEREMAIL, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="50px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 260px;">Expired / Contract End Date :</label>
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.EXPIRED, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control date", id = "expired"@*, required = "required"*@ @*} })*@
+                        @*</td>
+                        <td>
+                            <Font color="red"> * </Font>*@
+                            @*@Html.ValidationMessageFor(model => model.EXPIRED, "", new { @class = "text-danger" })*@
+                        @*</td>
+                    </tr>*@
+                    @*<tr>
+                            <td>
+                                <button type="submit" class="width-35 pull-left btn btn-sm btn-primary" id="submit" name="Submit" value="submit" style="margin-left:15px;height:40px; width:100px">
+                                    <i class="ace-icon fa fa-key"></i>
+                                    <span class="bigger-120">Submit</span>
+                                </button>
+                            </td>
+                        </tr>*@
+
+                @*</table>
+                <br />
+                <button class="btn btn-sm btn-success" type="submit" name="submit" id="Submit" value="submit" style="margin-left:10px; height:40px; width:100px">
+                    Submit
+                </button>
+
+                <button class="btn btn-sm btn-success" type="submit" name="submit" id="next" value="next" style="margin-left:20px; height:40px; width:130px">
+                    Next ListView
+                </button>*@
+                @*<button type="submit" class="width-25 pull-left btn btn-sm btn-primary" id="submit" name="Submit" value="submit" style="margin-left:15px;height:40px; width:40px">
+                        <i class="ace-icon fa fa-key"></i>
+                        <span class="bigger-120">Submit</span>
+                    </button>*@
+                @*<br /><br />
+
+            </div>
+        </div>
+    </div>*@
+    @section Scripts {
+        @*<link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+        <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>*@
+
+<link href="~/Scripts/jquery-ui-1.11.0.custom/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.0.custom/jquery-ui.min.js"></script>
+
+        @*<script src="~/assets/js/jquery-2.1.4.min.js"></script>
+        <link href="~/assets/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+        <script src="~/assets/js/bootstrap-datepicker.min.js"></script>
+        <script src="~/assets/js/Jquery.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>*@
+
+@*<script src="//code.jquery.com/jquery-1.10.2.js"
+        type="text/javascript"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"
+        type="text/javascript"></script>*@
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker").datepicker({
+            autoclose: true,
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '-100:+100'
+        });
+
+    });
+</script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#ENTITYDDL').change(function () {
+                    //$("#txtentity").disabled = true;
+                    //$("#txtcompany").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: 'getcompany',
+                        dataType: 'json',
+                        data: { },
+                        success: function (user) {
+
+                            //$("#txtcompany").empty();
+                            //$.each(user, function (i, usr) {
+                            //    $("#txtcompany").append('<option value="' + usr.Value + '">' +
+                            //         usr.Text + '</option>');
+                            //});
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve states.' + ex);
+                        }
+                    });
+                    return false;
+                })
+            });
+        </script>
+
+        <script type="text/javascript">
+                    function ValidateAlpha(evt) {
+                        var keyCode = (evt.which) ? evt.which : evt.keyCode
+                        if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 123) && keyCode != 32)
+
+                            return false;
+                        return true;
+                    }
+
+        </script>
+
+        <script type="text/javascript">
+                    function nospace(keyCode) {
+                        
+                        if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 123) && keyCode != 32)
+
+                            return false;
+
+                        if (event.keyCode == 32) {
+                            event.returnValue = false;
+                            return false;
+                        }
+
+                    }
+        </script> 
+        
+<script>
+    $(document).ready(function () {
+        $('#ENTITYDDL').change(function () {
+            $("#txtofficefloor").empty();
+            $("#txtofficephone").empty();
+            $("#txtfax").empty();
+            $("#txtcompany").empty();
+            $("#txtcity").val("");
+
+            $.ajax({
+                type: 'POST',
+                url: 'GetOfficeFloor',
+                dataType: 'json',
+                data: { id: $("#ENTITYDDL").val() },
+
+                success: function (i) {
+                    $("#txtofficefloor").val(i.OfficeFloor);
+                    $("#txtofficephone").val(i.OfficePhone);
+                    $("#txtfax").val(i.Fax);
+                    $("#txtcompany").val(i.Company);
+                    $("#txtsiteadd").val(i.txtsiteadd);
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        });
+    });
+
+    
+    $(document).ready(function () {
+        $('#txtterdaftar').change(function () {
+            //debugger;
+            //if ($('#txtterdaftar').val() == "Yes") {
+            //    $('#txtemployeestatus').attr("readOnly", true);
+            //} else {
+            //    $('#txtemployeestatus').attr("readOnly", false);
+            //}
+            $.ajax({
+                type: 'POST',
+                url: 'get_yesno',
+                dataType: 'json',
+                data: { terdaftar: $("#txtterdaftar").val() },
+
+                success: function (user) {
+                    $("#txtemployeestatus").empty();
+                    $.each(user, function (i, usr) {
+                        $("#txtemployeestatus").append('<option value="' + usr.Value + '">' +
+                             usr.Text + '</option>');
+                    })
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+    })
+</script>
+
+        <script language="javascript" type="text/javascript">
+            //function disallow char
+            //function OnlyNumeric(e) {
+            //    if ((e.which < 48 || e.which > 57)) {
+            //        if (e.which == 8 || e.which == 46 || e.which == 0) {
+            //            return true;
+            //        }
+            //        else {
+            //            return false;
+            //        }
+            //    }
+            //}
+
+            function allowOnlyDigit(evt, obj) {
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode == 45) {
+                    var val = obj.value;
+                    if (val.length > 0)
+                        return false;
+                }
+                    //untuk pengecualian pelarangan detail ada di setelah tanda seru
+                else if (!(charCode == 43) && charCode > 31 && (charCode < 48) || (charCode > 57)) {
+                    return false;
+                } 
+                return true;
+            }
+        </script>
+
+        @Scripts.Render("~/bundles/jqueryval")
+
+        @Scripts.Render("~/bundles/jqueryui")
+        @Styles.Render("~/Content/cssjqryUi")
+
+       <script type="text/javascript">
+                $(function () {
+                    $("#expired").datepicker({
+                        autoclose: true,
+                        dateFormat: 'mm/dd/yy',
+                        changeMonth: true,
+                        changeYear: true,
+                        yearRange: '-100:+100'
+                    }).val();
+                });
+        </script>
+
+        <script type="text/javascript">
+            $('#txtuniqueid').change(function () {
+                var Emails = $('#txtuniqueid').val();
+                $('#txtemail').val(Emails);
+            });
+
+
+            $(document).ready(function () {
+                //$.ajax({
+                //    type: 'POST',
+                //    url: 'getfloor',
+                //    dataType: 'json',
+                //    data: { officefloor: $("#ENTITYDDL").val() },
+
+                //    success: function (user) {
+                //        $("#txtofficefloor").empty();
+                //        $.each(user, function (i, usr) {
+                //            $("#txtofficefloor").append('<option value="' + usr.Value + '">' +
+                //                 usr.Text + '</option>');
+                //        });
+                //    },
+                //    error: function (ex) {
+                //        alert('Failed to retrieve states.' + ex);
+                //    }
+                //});
+                $('#txtsiteadd').change(function () {
+                    //debugger;
+                    var siteadd = $('#txtsiteadd').val();
+                    if (siteadd == "AXA Tower - Jakarta") {
+                        $('#txtcity').val("Jakarta");
+                        document.getElementById("txtcity").readOnly = true;
+                        document.getElementById("txtofficefloor").disabled = false;
+                        $.ajax({
+                            type: 'POST',
+                            url: 'Get2',
+                            dataType: 'json',
+                            data: { entity: $("#ENTITYDDL").val() },
+
+                            success: function (i) {
+                                $("#txtofficephone").val(i.OfficePhone);
+                                $("#txtfax").val(i.Fax);
+                            },
+                            error: function (ex) {
+                                alert('Failed to retrieve states.' + ex);
+                            }
+                        });
+                    
+                        $.ajax({
+                            type: 'POST',
+                            url: 'getfloor',
+                            dataType: 'json',
+                            data: { officefloor: $("#ENTITYDDL").val() },
+
+                            success: function (user) {
+                                $("#txtofficefloor").empty();
+                                $.each(user, function (i, usr) {
+                                    $("#txtofficefloor").append('<option value="' + usr.Value + '">' +
+                                         usr.Text + '</option>');
+                                });
+                            },
+                            error: function (ex) {
+                                alert('Failed to retrieve states.' + ex);
+                            }
+                        });
+                        return false;
+                    } else {
+                        $('#txtcity').val("");
+                        $('#txtofficefloor').val("");
+                        document.getElementById("txtofficefloor").disabled = true;
+                        $('#txtofficephone').val("+622130058899");
+                        $('#txtfax').val("+622130059008");
+                        if (siteadd == "") {
+                            $('#txtofficephone').val("");
+                            $('#txtfax').val("");
+                        }
+
+                        document.getElementById("txtcity").readOnly = false;
+                    }
+
+                });
+            })
+            $('#txtemployeestatus').change(function () {
+                //debugger;
+                if ($("#txtemployeestatus").val() == "Vendor" || $("#txtemployeestatus").val() == "Other") {
+                    $("#txtonchangeemployeestatus").attr("readOnly", false);
+                    $("#txtonchangeemployeestatus").attr("hidden", false);
+                    $("#txtonchangeemployeestatus2").attr("hidden", false);
+                } else {
+                    $("#txtonchangeemployeestatus").attr("readOnly", true);
+                    $("#txtonchangeemployeestatus").attr("hidden", true);
+                    $("#txtonchangeemployeestatus2").attr("hidden", true);
+                }
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                if ($("#txtemployeestatus").val() == "Vendor" || $("#txtemployeestatus").val() == "Other") {
+                    $("#txtonchangeemployeestatus").attr("readOnly", false);
+                    $("#txtonchangeemployeestatus").attr("hidden", false);
+                    $("#txtonchangeemployeestatus2").attr("hidden", false);
+                    if ($("#txtsiteadd").val() == "AXA Tower - Jakarta") {
+                        document.getElementById("txtofficefloor").disabled = false;
+                    } else {
+                        document.getElementById("txtofficefloor").disabled = true;
+                    }
+                } else {
+                    $("#txtonchangeemployeestatus").attr("readOnly", true);
+                    $("#txtonchangeemployeestatus").attr("hidden", true);
+                    $("#txtonchangeemployeestatus2").attr("hidden", true);
+                    if ($("#txtsiteadd").val() == "AXA Tower - Jakarta") {
+                        document.getElementById("txtofficefloor").disabled = false;
+                    } else {
+                        document.getElementById("txtofficefloor").disabled = true;
+                    }
+                }
+
+                    
+                //$.ajax({
+                //    type: 'POST',
+                //    url: 'getfloor',
+                //    dataType: 'json',
+                //    data: { officefloor: $("#ENTITYDDL").val() },
+
+                //    success: function (user) {
+                //        $("#txtofficefloor").empty();
+                //        $.each(user, function (i, usr) {
+                //            $("#txtofficefloor").append('<option value="' + usr.Value + '">' +
+                //                 usr.Text + '</option>');
+                //        });
+                //    },
+                //    error: function (ex) {
+                //        alert('Failed to retrieve states.' + ex);
+                //    }
+                //});
+                //return false;
+                $('#MANAGERNAMEDDL').change(function () {
+                    //debugger;
+                    $("#txtmanageremail").empty();
+             
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'Getmanageremail',
+                        dataType: 'json',
+                        data: { id: $("#MANAGERNAMEDDL").val() },
+
+                        success: function (i) {
+                           
+                            $("#txtmanageremail").val(i.manageremail);
+
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve states.' + ex);
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
+    }
+}
+

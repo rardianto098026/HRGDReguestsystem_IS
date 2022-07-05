@@ -1,0 +1,583 @@
+﻿@model HRGDReguestsystem_IS.Models.PagedList<HRGDReguestsystem_IS.Models.FORMModels>
+@{
+    ViewBag.Title = "Edit";
+}
+<h2  style="margin-left:19px">Edit Form Request Group Directory</h2>
+@using (Html.BeginForm("Edit", "RequestGD_IS", FormMethod.Post))
+{
+
+    <div class="row">
+        <br />
+        <br />
+        <div class="col-xs-12">
+            <div id="exTab2" class="container">
+                @*<ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1" data-toggle="tab">Page 1</a></li>
+                    <li><a href="#tab2" data-toggle="tab">Page 2</a></li>
+                    <li><a href="#tab3" data-toggle="tab">Page 3</a></li>
+                </ul>
+                @*<div class="tab-content">
+                    <div class="tab-pane active" id="tab1">*@
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Terdaftar di YES System : </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("TERDAFTAR", (SelectList)ViewBag.TerdaftarDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtterdaftar" })
+                                @*@Html.ValidationMessageFor(model => model.EMPLOYEESTATUS, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        @*@Html.CheckBox("isYES", @Model.isYES == true ? true : false, new { id = "isYES" })*@ @*<font color="black">Yes</font> / <font color="#251073"><i>Ya</i></font></b>*@
+                        @*@Html.ValidationMessageFor(model => model.isYES, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                        @*</div>*@
+                        @*</div><br /><br />*@
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Employee Status </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("EMPLOYEESTATUS", (SelectList)ViewBag.EmployeeStatusDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtemployeestatus" })
+                                @*@Html.ValidationMessageFor(model => model.EMPLOYEESTATUS, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;" id="txtonchangeemployeestatus2"> Remarks </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.EMPLOYEESTATUS_FreeText, new { @class = "col-xs-10 col-sm-5", id = "txtonchangeemployeestatus" })
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Entity </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("ENTITY", (SelectList)ViewBag.EntityDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "ENTITYDDL" })
+                                @*@Html.ValidationMessageFor(model => model.ENTITY, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Unique ID (E-mail AXA per Entity) </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.UNIQUEID, new { @class = "col-xs-10 col-sm-5", id = "txtuniqueid" })
+                                @*@Html.TextBox("EmployeeName_Requestor", null, new { id = "EmployeeName_Requestor", @class = "col-xs-10 col-sm-5", @placeholder = "EmployeeName", @readonly = "readonly" })*@
+                                @Html.ValidationMessageFor(model => model.UNIQUEID, "", new { @class = "text-danger", style = "Margin-left:10px", id = "validationOnLoadEmail" })
+
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Personal Title </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("PERSONALTITLE", (SelectList)ViewBag.PersonalTitleDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtpersonaltitle" })
+                                @*@Html.ValidationMessageFor(model => model.PERSONALTITLE, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> First Name </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.FIRSTNAME, new { @class = "col-xs-10 col-sm-5", id = "txtfirstname", @onkeypress = "return ValidateAlpha(event);" })
+                                @*@Html.TextBox("EmployeeName_Requestor", null, new { id = "EmployeeName_Requestor", @class = "col-xs-10 col-sm-5", @placeholder = "EmployeeName", @readonly = "readonly" })*@
+                                @*@Html.ValidationMessageFor(model => model.FIRSTNAME, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Last Name (1 Word Only) </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.LASTNAME, new { @class = "col-xs-10 col-sm-5", id = "txtlastname", @onkeypress = "return nospace(event.keyCode)" })
+                                @*@Html.TextBox("EmployeeName_Requestor", null, new { id = "EmployeeName_Requestor", @class = "col-xs-10 col-sm-5", @placeholder = "EmployeeName", @readonly = "readonly" })*@
+                                @*@Html.ValidationMessageFor(model => model.LASTNAME, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+
+                    @*<div class="tab-pane" id="tab2">*@
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Company </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.COMPANY, new { @class = "col-xs-10 col-sm-5", id = "txtcompany", @readonly = "readonly" })
+                                @Html.HiddenFor(model => model.COMPANY, new { id = "txtcompany" })
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Site Address </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("SITEADD", (SelectList)ViewBag.SiteAddDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtsiteadd" })
+                                @*@Html.ValidationMessageFor(model => model.SITEADD, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Office Floor </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("OFFICEFLOOR", (SelectList)ViewBag.OFFICEFLOORDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtofficefloor" })
+                                @*@Html.DropDownListFor(m => m.OFFICEFLOOR, Model.OFFICEFLOORDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtofficefloor", required = "required", name = "floor" })*@
+                                @*@Html.TextBoxFor(model => model.OFFICEFLOOR, new { id = "txtofficefloor", @class = "col-xs-10 col-sm-5"})*@
+                                @*@Html.HiddenFor(model => model.OFFICEFLOOR)*@
+                                @Html.ValidationMessageFor(model => model.OFFICEFLOOR, "", new { @class = "text-danger", style = "Margin-left:10px" })
+
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> City </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.CITY, new { @class = "col-xs-10 col-sm-5", id = "txtcity" })
+                                @*@Html.ValidationMessageFor(model => model.CITY, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Office Phone </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.OFFICEPHONE, new { id = "txtofficephone", @class = "col-xs-10 col-sm-5", @readonly = "readonly" })
+                                @Html.HiddenFor(model => model.OFFICEPHONE)
+                                @Html.ValidationMessageFor(model => model.OFFICEPHONE, "", new { @class = "text-danger", style = "Margin-left:10px" })
+
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Fax</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.FAX, new { id = "txtfax", @class = "col-xs-10 col-sm-5", @readonly = "readonly" })
+                                @Html.HiddenFor(model => model.FAX)
+                                @Html.ValidationMessageFor(model => model.FAX, "", new { @class = "text-danger", style = "Margin-left:10px" })
+
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Mobile </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.MOBILE, new { @class = "col-xs-10 col-sm-5", id = "txtmobile", onkeypress = "return allowOnlyDigit(event, this)", @maxlength = 15 })
+                                @*@Html.ValidationMessageFor(model => model.MOBILE, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> E-mail </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.EMAIL, new { @class = "col-xs-10 col-sm-5", id = "txtemail", @readonly = "readonly" })
+                                @*@Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                @*<Font color="red"> * </Font>*@
+                            </div>
+                        </div><br /><br />
+
+
+                    @*<div class="tab-pane" id="tab3">*@
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Professional Family </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("PROFESSIONALFAMILY", (SelectList)ViewBag.ProfessionalFamilyDDL, htmlAttributes: new { @class = "col-xs-10 col-sm-5 select2", @tabindex = "-1", @placeholder = "-Select-", id = "txtprofessionalfamily" })
+                                @*@Html.DropDownList("accountid", new SelectList(ViewBag.Accounts, "AccountID", "AccountName"))*@
+                                @*@Html.ValidationMessageFor(model => model.PROFESSIONALFAMILY, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Title/Position Name </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.TITTLE, new { @class = "col-xs-10 col-sm-5", id = "txttitlepositionname" })
+                                @*@Html.DropDownList("accountid", new SelectList(ViewBag.Accounts, "AccountID", "AccountName"))*@
+                                @*@Html.ValidationMessageFor(model => model.TITTLE, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Department </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.DEPART, new { @class = "col-xs-10 col-sm-5", id = "txtdepart" })
+                                @*@Html.ValidationMessageFor(model => model.DEPART, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Manager Name </label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("MANAGERNAME", (SelectList)ViewBag.managernameDDL, htmlAttributes: new
+                           {
+                               @class = "col-xs-10 col-sm-5 select2",
+                               @tabindex = "-1",
+                               @placeholder = "-Select-",
+                               id = "MANAGERNAMEDDL",
+                               data_show_subtext = "true",
+                               data_live_search = "true"
+                           })
+                                @*@Html.ValidationMessageFor(model => model.ENTITY, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Manager E-mail </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.MANAGEREMAIL, new { @class = "col-xs-10 col-sm-5", id = "txtmanageremail", @readonly = "readonly" })
+                            </div>
+                        </div><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Expired / Contract End Date </label>
+                            <div class="col-sm-9">
+                                @*@Html.EditorFor(model => model.EXPIRED, "{0:d MMM yyyy}", new { htmlAttributes = new { @class = "col-xs-10 col-sm-5 date", @placeholder = "0:d MMM yyyy", id = "expired" } })*@
+                                @Html.TextBoxFor(model => model.EXPIRED, new { id = "datepicker", @class = "col-xs-10 col-sm-5", @placeholder = "dd/mm/yyyy", autocomplete = "off" })
+                                @*<span class="input-group-addon add-on" style="width: 30px;margin-left:25px">*@
+                                <i data-time-icon="fa fa-calendar" class="fa fa-calendar" data-date-icon="fa fa-calendar"></i>
+                                @*</span>*@
+                                @*@Html.ValidationMessageFor(model => model.EXPIRED, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                                <Font color="red"> * </Font>
+                            </div>
+                        </div><br /><br />
+                        <div class="col-xs-12">
+                            @Html.Raw(TempData["messageRequest"])
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-sm btn-success" type="submit" name="Submit" id="UPDATE" value="UPDATE" style="margin-left:212px; height:40px; width:100px">
+                               Update
+                            </button>
+                            <button class="btn navbar-btn" type="submit" name="submit" id="submit" value="CANCEL" style="margin-left:20px; height:40px; width:100px"; onclick = "$('#txtuniqueid').val('abc@axa.com'); return confirm('Are you sure you want to cancel this update?');">
+                                Cancel
+                            </button>
+                        </div><br /><br />
+                    @*</div>*@
+
+                </div>
+    
+    </div>
+</div>
+
+    @section Scripts {
+
+        <script src="~/assets/js/jquery-2.1.4.min.js"></script>
+        <link href="~/assets/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+        <script src="~/assets/js/bootstrap-datepicker.min.js"></script>
+        <script src="~/assets/js/Jquery.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+
+
+        <script src="//code.jquery.com/jquery-1.10.2.js"
+                type="text/javascript"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"
+                type="text/javascript"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#datepicker").datepicker({
+                    autoclose: true,
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '-100:+100'
+                });
+            });
+        </script>
+
+
+        <script>
+            $('.btnNext').click(function () {
+                $('.nav-tabs > .active').next('li').find('a').trigger('click');
+            });
+
+            $('.btnPrevious').click(function () {
+                $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+            });
+                </script>
+                <script type="text/javascript">
+                    function ValidateAlpha(evt) {
+                        var keyCode = (evt.which) ? evt.which : evt.keyCode
+                        if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 123) && keyCode != 32)
+
+                            return false;
+                        return true;
+                    }
+
+
+                $(document).ready(function () {
+                $.ajax({
+                        type: 'POST',
+                        url: 'get_yesno',
+                        dataType: 'json',
+                        data: { terdaftar: $("#txtterdaftar").val() },
+
+                        success: function (user) {
+                            $("#txtemployeestatus").empty();
+                            $.each(user, function (i, usr) {
+                                $("#txtemployeestatus").append('<option value="' + usr.Value + '">' +
+                                     usr.Text + '</option>');
+                            });
+                            $("#txtemployeestatus").val("@Model.EMPLOYEESTATUS");
+                            if ($("#txtemployeestatus").val() == "Vendor" || $("#txtemployeestatus").val() == "Other") {
+                                $("#txtonchangeemployeestatus").attr("readOnly", false);
+                                $("#txtonchangeemployeestatus").attr("hidden", false);
+                                $("#txtonchangeemployeestatus2").attr("hidden", false);
+                                if ($("#txtsiteadd").val() == "AXA Tower - Jakarta") {
+                                    document.getElementById("txtofficefloor").disabled = false;
+                                } else {
+                                    document.getElementById("txtofficefloor").disabled = true;
+                                }
+                            } else {
+                                //$("#txtonchangeemployeestatus").attr("readOnly", true);
+                                $("#txtonchangeemployeestatus").attr("hidden", true);
+                                $("#txtonchangeemployeestatus2").attr("hidden", true);
+                                if ($("#txtsiteadd").val() == "AXA Tower - Jakarta") {
+                                    document.getElementById("txtofficefloor").disabled = false;
+                                } else {
+                                    document.getElementById("txtofficefloor").disabled = true;
+                                }
+                            }
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve states.' + ex);
+                        }
+                    });
+                $('#txtterdaftar').change(function () {
+                    debugger;
+                    if ($('#txtterdaftar').val() == "Yes") {
+                        $('#txtonchangeemployeestatus').attr("disabled", "disabled");
+                        $("#txtonchangeemployeestatus").attr("hidden", true);
+                        $("#txtonchangeemployeestatus2").attr("hidden", true);
+                        $("#txtonchangeemployeestatus").val("");
+                    }
+                    $.ajax({
+                        type: 'POST',
+                        url: 'get_yesno',
+                        dataType: 'json',
+                        data: { terdaftar: $("#txtterdaftar").val() },
+
+                        success: function (user) {
+                            $("#txtemployeestatus").empty();
+                            $.each(user, function (i, usr) {
+                                $("#txtemployeestatus").append('<option value="' + usr.Value + '">' +
+                                     usr.Text + '</option>');
+                            })
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve states.' + ex);
+                        }
+                    });
+                    return false;
+                })
+            })
+        </script>
+
+        <script type="text/javascript">
+                            function nospace(keyCode) {
+
+                                if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 123) && keyCode != 32)
+
+                                    return false;
+
+                                if (event.keyCode == 32) {
+                                    event.returnValue = false;
+                                    return false;
+                                }
+
+                            }
+        </script> 
+
+        <script>
+            $(document).ready(function () {
+                if ($("#txtsiteadd").val() == "AXA Tower - Jakarta") {
+                    document.getElementById("txtofficefloor").disabled = false;
+                } else {
+                    document.getElementById("txtofficefloor").disabled = true;
+                }
+                $('#validationOnLoadEmail').html(' ');
+                //document.getElementById('validationOnLoadEmail').id = ' a';
+                $('#ENTITYDDL').change(function () {
+                    $("#txtofficefloor").empty();
+                    $("#txtofficephone").empty();
+                    $("#txtfax").empty();
+                    $("#txtcompany").empty();
+                    $("#txtcity").val("");
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'GetOfficeFloor',
+                        dataType: 'json',
+                        data: { id: $("#ENTITYDDL").val() },
+
+                        success: function (i) {
+                            $("#txtofficefloor").val(i.OfficeFloor);
+                            $("#txtofficephone").val(i.OfficePhone);
+                            $("#txtfax").val(i.Fax);
+                            $("#txtcompany").val(i.Company);
+                            $("#txtsiteadd").val(i.txtsiteadd);
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve states.' + ex);
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
+        <script language="javascript" type="text/javascript">
+                    //function disallow char
+            function allowOnlyDigit(evt, obj) {
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode == 45) {
+                    var val = obj.value;
+                    if (val.length > 0)
+                        return false;
+                }
+                    //untuk pengecualian pelarangan detail ada di setelah tanda seru
+                else if (!(charCode == 43) && charCode > 31 && (charCode < 48) || (charCode > 57)) {
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        @Scripts.Render("~/bundles/jqueryval")
+
+        @Scripts.Render("~/bundles/jqueryui")
+        @Styles.Render("~/Content/cssjqryUi")
+
+        @*<script type="text/javascript">
+                $(function () {
+                    $("#expired").datepicker({
+                        autoclose: true,
+                        format: 'dd/mm/yyyy',
+                        changeMonth: true,
+                        changeYear: true,
+                        yearRange: '-100:+100'
+                    }).val();
+                });
+            </script>*@
+        
+
+        <script type="text/javascript">
+            $('#txtuniqueid').change(function () {
+                var Emails = $('#txtuniqueid').val();
+                $('#txtemail').val(Emails);
+            });
+
+            $(document).ready(function () {
+                $('#MANAGERNAMEDDL').change(function () {
+                    $("#txtmanageremail").empty();
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'Getmanageremail',
+                        dataType: 'json',
+                        data: { id: $("#MANAGERNAMEDDL").val() },
+
+                        success: function (i) {
+
+                            $("#txtmanageremail").val(i.manageremail);
+
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve states.' + ex);
+                        }
+                    });
+                    return false;
+                });
+            });
+
+
+            $('#txtemployeestatus').change(function () {
+                //debugger;
+                if ($("#txtemployeestatus").val() == "Vendor" || $("#txtemployeestatus").val() == "Other") {
+                    $('#txtonchangeemployeestatus').attr("disabled", false);
+                    $("#txtonchangeemployeestatus").attr("hidden", false);
+                    $("#txtonchangeemployeestatus2").attr("hidden", false);
+                } else {
+                    $('#txtonchangeemployeestatus').attr("disabled", "disabled");
+                    $("#txtonchangeemployeestatus").attr("hidden", true);
+                    $("#txtonchangeemployeestatus2").attr("hidden", true);
+                    $("#txtonchangeemployeestatus").val("");
+                    
+                }
+            });
+
+
+            $(document).ready(function () {
+                //alert('popup~');
+                //window.location.href = 'http://localhost:60534/ListGD';
+                $.ajax({
+                    type: 'POST',
+                    url: 'getfloor',
+                    dataType: 'json',
+                    data: { officefloor: $("#ENTITYDDL").val() },
+
+                    success: function (user) {
+                        $("#txtofficefloor").empty();
+                        $.each(user, function (i, usr) {
+                            $("#txtofficefloor").append('<option value="' + usr.Value + '">' +
+                                 usr.Text + '</option>');
+                        });
+                        //debugger;
+                        $("#txtofficefloor").val("@Model.OFFICEFLOOR");
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+
+                $('#txtsiteadd').change(function () {
+                    var siteadd = $('#txtsiteadd').val();
+                    if (siteadd == "AXA Tower - Jakarta") {
+                        $('#txtcity').val("Jakarta");
+                        document.getElementById("txtofficefloor").disabled = false;
+                        document.getElementById("txtcity").readOnly = true;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: 'Get2',
+                            dataType: 'json',
+                            data: { entity: $("#ENTITYDDL").val() },
+
+                            success: function (i) {
+                                $("#txtofficefloor").val(i.OfficeFloor);
+                                $("#txtfax").val(i.Fax);
+                                $("#txtofficephone").val(i.OfficePhone);
+
+                            },
+                            error: function (ex) {
+                                alert('Failed to retrieve states.' + ex);
+                            }
+                        });
+                        $.ajax({
+                            type: 'POST',
+                            url: 'getfloor',
+                            dataType: 'json',
+                            data: { officefloor: $("#ENTITYDDL").val() },
+
+                            success: function (user) {
+                                $("#txtofficefloor").empty();
+                                $.each(user, function (i, usr) {
+                                    $("#txtofficefloor").append('<option value="' + usr.Value + '">' +
+                                         usr.Text + '</option>');
+                                });
+                                $("#txtofficefloor").val("@Model.OFFICEFLOOR");
+                            },
+                            error: function (ex) {
+                                alert('Failed to retrieve states.' + ex);
+                            }
+                        });
+                        return false;
+                    } else {
+                        $('#txtcity').val("");
+                        $('#txtofficefloor').val("");
+                        document.getElementById("txtofficefloor").disabled = true;
+                        $('#txtofficephone').val("+622130058899");
+                        $('#txtfax').val("+622130059008");
+                        if (siteadd == "") {
+                            $('#txtofficephone').val("");
+                            $('#txtfax').val("");
+                        }
+                        document.getElementById("txtcity").readOnly = false;
+                    }
+
+                });
+            });
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "http://localhost:60534/ListGD",
+            //    dataType: 'json',
+            //    crossDomain: true,
+            //    success: function (data) {
+            //        window.location.href = data;
+            //    }
+            //});
+        </script>
+
+    }
+    
+}
+        

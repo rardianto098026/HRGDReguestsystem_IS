@@ -1,0 +1,157 @@
+﻿@using HRGDReguestsystem_IS.Models
+@model HRGDReguestsystem_IS.Models.PagedListTR<HRGDReguestsystem_IS.Models.ListGDModels>
+
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_LayoutTR.cshtml";
+
+}
+
+
+@using (Html.BeginForm("Admin", "ListGD", FormMethod.Post))
+{
+
+    <div style="margin-left:50px;margin-right:50px">
+        <h2>Admin GD List</h2>
+        <br />
+        <br />
+        <table>
+            <tr>
+                <td style="padding-bottom:10px;padding-top:10px">Employee ID</td>
+                <td>&nbsp;:</td>
+                <td class="col-sm-9">@Html.TextBox("Emp_ID", null, new { @class = "form-control", id = "Emp_ID", name = "Emp_ID" })</td>
+            </tr>
+
+            <tr>
+                <td style="padding-bottom:10px;padding-top:10px">Request For </td>
+                <td>&nbsp;:</td>
+                <td class="col-sm-9">@Html.TextBox("Name", null, new { @class = "form-control", id = "Name", name = "Name" })</td>
+            </tr>
+
+            <tr>
+                <td style="padding-bottom:10px;padding-top:10px">Entity</td>
+                <td>&nbsp;:</td>
+                <td>
+                    <div class="col-sm-9">
+                        @Html.DropDownListFor(m => m.Entity, Model.ENTITYY, new { @class = "form-control", id = "ddlEntity", style = "width: 300px;" })
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br />
+
+        <table>
+            <tr id="tr_btnSD">
+                <td>
+                    <button class="btn btn-sm btn-success" type="submit" name="submit" id="Search" value="SEARCHHH" style="height:40px; width:100px">
+                        Search
+                    </button>
+                </td>
+                <td style="width:20px"></td>
+                <td>
+                    <button class="btn navbar-btn" type="submit" name="submit" id="Download" value="Download" style="height:40px; width:100px;">
+                        Download
+                    </button>
+                </td>
+                <td style="width:20px"></td>
+                
+            </tr>
+        </table>
+
+
+        <br />
+        <div>
+            <div class="dataTables_wrapper form-inline no-footer">
+                <div class="ui-jqgrid-hdiv ui-state-default">
+                    <div class="ui-jqgrid-hbox">
+                        <table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dynamic-table_info">
+                            <thead>
+                                <tr role="row" style="font-size:12px">
+                                    <th tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">No</th>
+                                    <th tabindex="1" aria-controls="dynamic-table" rowspan="1" colspan="1">Employee ID</th>
+                                    <th tabindex="2" aria-controls="dynamic-table" rowspan="1" colspan="1">Name</th>
+                                    <th tabindex="3" aria-controls="dynamic-table" rowspan="1" colspan="1">Entity</th>
+                                    <th tabindex="4" aria-controls="dynamic-table" rowspan="1" colspan="1">Request For</th>
+                                    <th tabindex="5" aria-controls="dynamic-table" rowspan="1" colspan="1">Status</th>
+                                    <th tabindex="6" aria-controls="dynamic-table" rowspan="1" colspan="1">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @for (int i = 0; i < Model.Content.Count; i++)
+                                {
+                                    <tr style="font-size:12px">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model.Content[i].no)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model.Content[i].Emp_ID)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model.Content[i].Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model.Content[i].Entity)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model.Content[i].Req_For)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model.Content[i].Flag)
+                                        </td>
+
+                                        <td>
+                                            <div class="hidden-sm hidden-xs action-buttons">
+                                                <a class="green" href="@Url.Action("Approval_Reject_Page", "AR", new { idx = Model.Content[i].idx})">
+                                                    Details
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            @Html.Raw(TempData["message"])
+        </div>
+    </div>
+    @section Scripts {
+
+        <script type="text/javascript">
+                $(document).ready(function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'get_entity_LIST',
+                        dataType: 'json',
+                        data: {},
+
+                        success: function (user) {
+                            $("#ddlEntity").empty();
+                            $.each(user, function (i, usr) {
+                                $("#ddlEntity").append('<option value="' + usr.Value + '">' +
+                                     usr.Text + '</option>');
+                            })
+
+                        },
+                        error: function (ex) {
+                            console.log('Cannot retrieve data.');
+                        }
+                    });
+                    return false;
+                });
+
+
+        </script>
+
+    }
+}

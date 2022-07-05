@@ -1,0 +1,274 @@
+﻿@model HRGDReguestsystem_IS.Models.PagedList<HRGDReguestsystem_IS.Models.FORMModels>
+@{
+    ViewBag.Title = "Approval_Reject_Page";
+}
+
+<h2 style="margin-left:19px">Admin History Page</h2>
+@using (Html.BeginForm("AHP", "AdminHistoryPage", FormMethod.Post))
+{
+    <div class="row">
+        <br />
+        <br />
+        <div class="col-xs-12">
+            <div id="exTab2" class="container">
+                @*<ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">Page 1</a></li>
+                        <li><a href="#tab2" data-toggle="tab">Page 2</a></li>
+                        <li><a href="#tab3" data-toggle="tab">Page 3</a></li>
+                    </ul>*@
+                @*<div class="tab-content">
+                    <div class="tab-pane active" id="tab1">*@
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Terdaftar di YES System </label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.TERDAFTAR, new { @class = "col-xs-10 col-sm-5", id = "txtterdaftar", @disabled = "disabled", @readonly = "readonly" })
+                        @*@Html.CheckBox("isYES", @Model.isYES == true ? true : false, new { id = "isYES" })*@ @*<font color="black">Yes</font> / <font color="#251073"><i>Ya</i></font></b>*@
+                        @*@Html.ValidationMessageFor(model => model.isYES, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+
+                    </div>
+                </div><br /><br />
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Employee Status </label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.EMPLOYEESTATUS, new { @class = "col-xs-10 col-sm-5", id = "txtemployeestatus", @disabled = "disabled", @readonly = "readonly" })
+                        @*@Html.ValidationMessageFor(model => model.EMPLOYEESTATUS, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                        @*<Font color="red"> * </Font>*@
+                    </div>
+                </div><br /><br />
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;" id="txtonchangeemployeestatus2"> Remarks </label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.EMPLOYEESTATUS_FreeText, new { @class = "col-xs-10 col-sm-5", id = "txtonchangeemployeestatus", @disabled = "disabled", @readonly = "readonly" })
+                    </div>
+                </div><br /><br />
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Entity </label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.ENTITY, new { @class = "col-xs-10 col-sm-5", id = "txtentity", @disabled = "disabled", @readonly = "readonly" })
+                        @*@Html.ValidationMessageFor(model => model.ENTITY, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                        @*<Font color="red"> * </Font>*@
+                    </div>
+                </div><br /><br />
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Unique ID (Email AXA per Entity) </label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.UNIQUEID, new { @class = "col-xs-10 col-sm-5", id = "txtuniqueid", @disabled = "disabled", @readonly = "readonly" })
+                        @*@Html.TextBox("EmployeeName_Requestor", null, new { id = "EmployeeName_Requestor", @class = "col-xs-10 col-sm-5", @placeholder = "EmployeeName", @readonly = "readonly" })*@
+                        @*@Html.ValidationMessageFor(model => model.UNIQUEID, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+
+                    </div>
+                </div><br /><br />
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Personal Title </label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.PERSONALTITLE, new { @class = "col-xs-10 col-sm-5", id = "txtpersonaltitle", @disabled = "disabled", @readonly = "readonly" })
+                        @*@Html.ValidationMessageFor(model => model.PERSONALTITLE, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                        @*<Font color="red"> * </Font>*@
+                    </div>
+                </div><br /><br />
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> First Name </label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.FIRSTNAME, new { @class = "col-xs-10 col-sm-5", id = "txtfirstname", @onkeypress = "return ValidateAlpha(event);", @disabled = "disabled", @readonly = "readonly" })
+                        @*@Html.TextBox("EmployeeName_Requestor", null, new { id = "EmployeeName_Requestor", @class = "col-xs-10 col-sm-5", @placeholder = "EmployeeName", @readonly = "readonly" })*@
+                        @*@Html.ValidationMessageFor(model => model.FIRSTNAME, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                        @*<Font color="red"> * </Font>*@
+                    </div>
+                </div><br /><br />
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Last Name (1 Word Only) </label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.LASTNAME, new { @class = "col-xs-10 col-sm-5", id = "txtlastname", @onkeypress = "return ValidateAlpha(event);", @disabled = "disabled", @readonly = "readonly" })
+                        @*@Html.TextBox("EmployeeName_Requestor", null, new { id = "EmployeeName_Requestor", @class = "col-xs-10 col-sm-5", @placeholder = "EmployeeName", @readonly = "readonly" })*@
+                        @*@Html.ValidationMessageFor(model => model.LASTNAME, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                        @*<Font color="red"> * </Font>*@
+                    </div>
+                </div><br /><br />
+
+                @*<a class="btn btn-primary btnNext">Next</a>
+                    </div>
+                    <div class="tab-pane" id="tab2"*@@*>*@
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Company </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.COMPANY, new { @class = "col-xs-10 col-sm-5", id = "txtcompany", @readonly = "readonly" })
+                            @*@Html.HiddenFor(model => model.COMPANY, new { id = "txtcompany" })*@
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Site Address </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.SITEADD, new { @class = "col-xs-10 col-sm-5", id = "txtsiteadd", @disabled = "disabled", @readonly = "readonly" })
+                            @*@Html.ValidationMessageFor(model => model.SITEADD, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                            @*<Font color="red"> * </Font>*@
+                        </div>
+                    </div><br /><br />
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Office Floor </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.OFFICEFLOOR, new { id = "txtofficefloor", @class = "col-xs-10 col-sm-5", @readonly = "readonly" })
+                            @*@Html.HiddenFor(model => model.OFFICEFLOOR)
+                                @Html.ValidationMessageFor(model => model.OFFICEFLOOR, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> City </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.CITY, new { @class = "col-xs-10 col-sm-5", id = "txtcity", @disabled = "disabled", @readonly = "readonly" })
+                            @*@Html.ValidationMessageFor(model => model.CITY, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                            @*<Font color="red"> * </Font>*@
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Office Phone </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.OFFICEPHONE, new { id = "txtofficephone", @class = "col-xs-10 col-sm-5", @readonly = "readonly" })
+                            @*@Html.HiddenFor(model => model.OFFICEPHONE)
+                                @Html.ValidationMessageFor(model => model.OFFICEPHONE, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Fax</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.FAX, new { id = "txtfax", @class = "col-xs-10 col-sm-5", @readonly = "readonly" })
+                            @*@Html.HiddenFor(model => model.FAX)
+                                @Html.ValidationMessageFor(model => model.FAX, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Mobile </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.MOBILE, new { @class = "col-xs-10 col-sm-5", id = "txtmobile", onkeypress = "return allowOnlyDigit(event, this)", @disabled = "disabled", @readonly = "readonly" })
+                            @*@Html.ValidationMessageFor(model => model.MOBILE, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                            @*<Font color="red"> * </Font>*@
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Email </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.EMAIL, new { @class = "col-xs-10 col-sm-5", id = "txtemail", @readonly = "readonly", @disabled = "disabled" })
+                            @*@Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                            @*<Font color="red"> * </Font>*@
+                        </div>
+                    </div><br /><br />
+                    @*<a class="btn btn-primary btnNext">Next</a>
+                            <a class="btn btn-primary btnPrevious">Previous</a>
+                        </div>
+                        <div class="tab-pane" id="tab3">*@
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Professional Family </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.PROFESSIONALFAMILY, new { @class = "col-xs-10 col-sm-5", id = "txtpersonalfamily", @disabled = "disabled", @readonly = "readonly" })
+                            @*@Html.DropDownList("accountid", new SelectList(ViewBag.Accounts, "AccountID", "AccountName"))*@
+                            @*@Html.ValidationMessageFor(model => model.PROFESSIONALFAMILY, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                            @*<Font color="red"> * </Font>*@
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Title/Position Name </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.TITTLE, new { @class = "col-xs-10 col-sm-5", id = "txttitle", @disabled = "disabled", @readonly = "readonly" })
+                            @*@Html.DropDownList("accountid", new SelectList(ViewBag.Accounts, "AccountID", "AccountName"))*@
+                            @*@Html.ValidationMessageFor(model => model.TITTLE, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                            @*<Font color="red"> * </Font>*@
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Department </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.DEPART, new { @class = "col-xs-10 col-sm-5", id = "txtdepart", @disabled = "disabled", @readonly = "readonly" })
+                            @*@Html.ValidationMessageFor(model => model.DEPART, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                            @*<Font color="red"> * </Font>*@
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Manager Name </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.MANAGERNAME, new { @class = "col-xs-10 col-sm-5", id = "txtmanagername", @disabled = "disabled", @readonly = "readonly" })
+                            @*@Html.ValidationMessageFor(model => model.MANAGERNAME, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                            @*<Font color="red"> * </Font>*@
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Manager Email </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.MANAGEREMAIL, new { @class = "col-xs-10 col-sm-5", id = "txtmanageremail", @disabled = "disabled", @readonly = "readonly" })
+                            @*@Html.ValidationMessageFor(model => model.MANAGEREMAIL, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Expired / Contract End Date </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.EXPIRED, new { @class = "col-xs-10 col-sm-5", id = "txtexpired", @disabled = "disabled", @readonly = "readonly" })
+                            @*<span class="input-group-addon add-on" style="width: 30px;margin-left:25px">*@
+                            @*<i data-time-icon="fa fa-calendar" class="fa fa-calendar" data-date-icon="fa fa-calendar"></i>*@
+                            @*</span>*@
+                            @*@Html.ValidationMessageFor(model => model.EXPIRED, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                            @*<Font color="red"> * </Font>*@
+
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="width: 200px;"> Remarks Admin </label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.remarksadmin, new { @class = "col-xs-10 col-sm-5", id = "txtremarksadmin", @disabled = "disabled", @readonly = "readonly" })
+                            @*@Html.ValidationMessageFor(model => model.MANAGEREMAIL, "", new { @class = "text-danger", style = "Margin-left:10px" })*@
+                        </div>
+                    </div><br /><br />
+                    <div class="col-xs-12">
+                        @Html.Raw(TempData["messageRequest"])
+                    </div>
+                    <div class="form-group">
+                        <button class="btn navbar-btn" type="submit" name="submit" id="back" value="back" style="margin-left:212px; height:40px; width:100px">
+                            Back
+                        </button>
+                        
+                    </div><br /><br />
+                    @*<a class="btn btn-primary btnPrevious">Previous</a>
+                        </div>*@
+
+                    @*</div>*@
+
+                </div>
+            </div>
+        </div>
+}
+
+@section Scripts {
+    @*<link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+        <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>*@
+
+    <script src="~/assets/js/jquery-2.1.4.min.js"></script>
+    <link href="~/assets/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <script src="~/assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/assets/js/Jquery.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <script>
+      
+
+        $(document).ready(function () {
+        //$('#txtemployeestatus').re(function () {
+            //debugger;
+            if ($("#txtemployeestatus").val() == "Vendor" || $("#txtemployeestatus").val() == "Other") {
+                //$('#txtonchangeemployeestatus').attr("disabled", true);
+                $("#txtonchangeemployeestatus").attr("hidden", false);
+                $("#txtonchangeemployeestatus2").attr("hidden", false);
+            } else {
+                //$('#txtonchangeemployeestatus').attr("disabled", "disabled");
+                $("#txtonchangeemployeestatus").attr("hidden", true);
+                $("#txtonchangeemployeestatus2").attr("hidden", true);
+                $("#txtonchangeemployeestatus").val("");
+
+            }
+        });
+
+    </script>
+    }
+
+
